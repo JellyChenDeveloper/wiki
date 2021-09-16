@@ -1,0 +1,6 @@
+!.vuepress
+node_modules
+.temp
+.cache
+.idea
+dist

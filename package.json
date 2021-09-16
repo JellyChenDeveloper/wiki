@@ -1,0 +1,19 @@
+{
+  "name": "wiki",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "editFm": "node utils/editFrontmatter.js"
+  },
+  "devDependencies": {
+    "@vuepress/plugin-search": "^2.0.0-beta.26",
+    "chalk": "^4.1.2",
+    "inquirer": "^8.1.2",
+    "json2yaml": "^1.1.0",
+    "vuepress-vite": "^2.0.0-beta.26",
+    "yamljs": "^0.3.0"
+  }
+}
