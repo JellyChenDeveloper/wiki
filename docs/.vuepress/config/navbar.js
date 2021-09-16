@@ -17,6 +17,5 @@ module.exports = [
       '/ElasticSearch/'
     ]
   },
-  '/SoftSys/',
-  '/MyWork/'
+  '/SoftSys/'
 ]
