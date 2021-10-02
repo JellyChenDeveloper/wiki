@@ -6,7 +6,7 @@
 
 ### IDE
 
-* IntelliJ系列软件：[IntelliJ](software/IDE/IntelliJ/README.md)
+* JetBrains系列软件：[JetBrains](software/IDE/JetBrains/README.md)
 * 文本编辑 [vim](software/IDE/vim/README.md)
 
 ### 容器

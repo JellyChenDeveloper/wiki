@@ -35,7 +35,7 @@ vim webstorm.vmoptions
 
 ## 修改Activation Code
 
-重启Intellij WebStorm，在Activation Code输入：
+重启WebStorm，在Activation Code输入：
 
 ```vim
 {
