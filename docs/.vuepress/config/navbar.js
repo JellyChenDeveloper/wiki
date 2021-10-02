@@ -17,5 +17,11 @@ module.exports = [
       '/ElasticSearch/'
     ]
   },
-  '/SoftSys/'
+  {
+    text: '软件系统',
+    children: [
+      '/SoftSys/',
+      '/Server/'
+    ]
+  }
 ]
