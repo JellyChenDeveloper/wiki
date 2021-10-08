@@ -3,6 +3,7 @@ const {navbarConfig} = require('vuepress-theme-hope')
 // 导航栏
 module.exports = navbarConfig([
   {text: '首页', link: '/'},
+  {text: '所有文章', link: '/article/'},
   {
     text: '开发语言',
     items: [

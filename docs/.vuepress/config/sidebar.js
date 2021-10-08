@@ -91,14 +91,14 @@ module.exports = sidebarConfig({
     '/PHP/server.md',
     '/PHP/globals.md'
   ],
-  '/MyWork/': [
-    '/MyWork/',
-    '/MyWork/person/',
-    '/MyWork/xlink/',
-    '/MyWork/cuiwen/',
-    '/MyWork/meishubao/',
-    '/MyWork/inspur/',
-    '/MyWork/tdh/',
-    '/MyWork/neusoft/'
+  '/person/': [
+    '/person/',
+    '/person/person/',
+    '/person/xlink/',
+    '/person/cuiwen/',
+    '/person/meishubao/',
+    '/person/inspur/',
+    '/person/tdh/',
+    '/person/neusoft/'
   ]
 })

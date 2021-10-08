@@ -1,3 +1,13 @@
+---
+
+category: Server
+
+tags:
+
+- server
+
+---
+
 # 服务器配置记录
 
 * [修改源](修改centos源镜像.md)

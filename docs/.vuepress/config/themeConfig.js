@@ -9,10 +9,10 @@ module.exports = {
   // repo: 'https://gitee.com/JellyChen/vuepress-wiki',
   repo: 'https://github.com/JellyChenDeveloper/wiki',
   repoDisplay: false,
-  editLinkText: '编辑此页',
   docsBranch: 'main',
   docsDir: 'docs',
   editLinkPattern: ':repo/edit/:branch/:path',
+  editLinkText: '编辑此页',
   lastUpdatedText: '最近更新',
   contributorsText: '贡献者',
   searchPlaceholder: 'Search...',
@@ -24,14 +24,15 @@ module.exports = {
     content: '<a href="/" target="_self">Jelly WIKI</a> | <a href="http://jellychen.cn" target="_blank">jellychen.cn</a>',
     copyright: 'Copyright © 2015-present | <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备18020599号-1</a>'
   },
-  pageInfo: {
-    author: 'JellyChen'
-  },
+  author: 'JellyChen',
   copyCode: {
     showInMobile: true
   },
   feed: false,
   git: {
     timezone: 'Asia/Shanghai'
+  },
+  encrypt: {
+    '/person/': ['admin888', '451453325']
   }
 }
