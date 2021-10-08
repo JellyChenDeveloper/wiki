@@ -1,7 +1,6 @@
 ---
 home: true
 heroImage: /img/logo.png
-footer: Copyright © 2015-present | Jelly Chen | jellychen.cn | 京ICP备18020599号-1
 ---
 
 # 首页

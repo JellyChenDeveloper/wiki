@@ -4,14 +4,34 @@ const sidebar = require('./sidebar')
 module.exports = {
   logo: '/img/logo.png', // logo
   home: '/', // 首页路径
-  navbar: navbar,
+  nav: navbar,
   sidebar: sidebar,
-  repo: 'https://gitee.com/JellyChen/vuepress-wiki',
+  // repo: 'https://gitee.com/JellyChen/vuepress-wiki',
+  repo: 'https://github.com/JellyChenDeveloper/wiki',
+  repoDisplay: false,
   editLinkText: '编辑此页',
-  // docsRepo: 'https://gitee.com/JellyChen/vuepress-wiki',
-  docsBranch: 'master',
+  docsBranch: 'main',
   docsDir: 'docs',
   editLinkPattern: ':repo/edit/:branch/:path',
   lastUpdatedText: '最近更新',
-  contributorsText: '贡献者'
+  contributorsText: '贡献者',
+  searchPlaceholder: 'Search...',
+  mdEnhance: {
+    enableAll: true
+  },
+  footer: {
+    display: true,
+    content: '<a href="/" target="_self">Jelly WIKI</a> | <a href="http://jellychen.cn" target="_blank">jellychen.cn</a>',
+    copyright: 'Copyright © 2015-present | <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备18020599号-1</a>'
+  },
+  pageInfo: {
+    author: 'JellyChen'
+  },
+  copyCode: {
+    showInMobile: true
+  },
+  feed: false,
+  git: {
+    timezone: 'Asia/Shanghai'
+  }
 }

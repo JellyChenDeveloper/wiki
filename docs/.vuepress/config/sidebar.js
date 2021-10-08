@@ -1,22 +1,24 @@
+const {sidebarConfig} = require('vuepress-theme-hope')
+
 // 侧边栏
-module.exports = {
+module.exports = sidebarConfig({
   '/html/': [
     '/html/',
     {
-      text: '浏览器对象',
+      title: '浏览器对象',
       children: [
         {
-          text: 'window',
+          title: 'window',
           link: '/html/browser/window',
           children: [
             {
-              text: '函数',
+              title: '函数',
               children: [
                 '/html/browser/window/function/open.md'
               ]
             },
             {
-              text: '属性',
+              title: '属性',
               children: [
                 '/html/browser/window/property/closed.md',
                 '/html/browser/window/property/defaultstatus.md',
@@ -31,22 +33,22 @@ module.exports = {
   '/Node/': [
     '/Node/',
     {
-      text: '系统包',
+      title: '系统包',
       children: [
         '/Node/system/npm.md'
       ]
     },
     {
-      text: '控制台工具包',
+      title: '控制台工具包',
       children: [
         '/Node/cli/argparse.md'
       ]
     },
     {
-      text: '第三方包',
+      title: '第三方包',
       children: [
         {
-          text: 'markdownLint',
+          title: 'markdownLint',
           link: '/Node/tool/markdownLint',
           children: [
             '/Node/tool/markdownLint/cli.md',
@@ -60,15 +62,15 @@ module.exports = {
     '/Linux/',
     '/Linux/tips/',
     {
-      text: '命令',
+      title: '命令',
       children: [
         {
-          text: '文件管理',
+          title: '文件管理',
           children: [
             '/Linux/cmd/文件管理/cat.md',
             '/Linux/cmd/文件管理/chgrp.md',
             '/Linux/cmd/文件管理/rm.md',
-            '/Linux/cmd/文件管理/touch.md',
+            '/Linux/cmd/文件管理/touch.md'
           ]
         },
         '/Linux/cmd/du.md',
@@ -79,7 +81,7 @@ module.exports = {
         '/Linux/cmd/shutdown.md',
         '/Linux/cmd/type.md'
       ]
-    },
+    }
   ],
   '/PHP/': [
     '/PHP/',
@@ -99,4 +101,4 @@ module.exports = {
     '/MyWork/tdh/',
     '/MyWork/neusoft/'
   ]
-}
+})
