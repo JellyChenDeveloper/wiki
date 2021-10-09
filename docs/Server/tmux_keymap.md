@@ -24,12 +24,11 @@ tags:
 |---|---|---|
 |-|启动|`tmux`|
 |-|创建命名会话|`new -s <session-name>`|
+|-|重新接入会话|`attach -t 0` 或 `a -t <session-name>`|
+|-|杀死会话|`kill-session -t 0` 或 `kill-session -t <session-name>`|
 |`prefix d`|分离当前会话|`detach-client`|
 |`prefix s`|列出所有会话|`choose-tree -Zs`|
 |`prefix $`|重命名当前会话|`rename-session -t <session-name> <new-name>`|
-|-|重新接入会话|`attach -t 0` 或 `a -t <session-name>`|
-|-|杀死会话|`kill-session -t 0` 或 `kill-session -t <session-name>`|
-|-|切换会话|`switch -t 0` 或 `switch -t <session-name>`|
 |`prefix (`|切换上一个会话|`switch-client -p`|
 |`prefix )`|切换下一个会话|`switch-client -n`|
 |`prefix L`|切换到上一个活动会话|`switch-client -l`|
