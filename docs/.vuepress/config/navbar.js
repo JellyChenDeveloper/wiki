@@ -26,5 +26,6 @@ module.exports = navbarConfig([
       {text: '软件系统', link: '/SoftSys/'},
       {text: '服务器配置记录', link: '/Server/'}
     ]
-  }
+  },
+  {text: 'vim', link: '/vim/'}
 ])
