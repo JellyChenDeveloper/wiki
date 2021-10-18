@@ -308,8 +308,7 @@ Jscript 有三种主要数据类型、两种复合数据类型和两种特殊数
 
 ### 浮点值
 
-浮点值为带小数部分的数。也可以用科学计数法来表示。这就是说，大写或小写“e”用来表示 10 的次方。Jscript用数值表示的八字节 IEEE754 浮点标准。这意味着数字最大可以到±1.7976931348623157x10<sup>
-308</sup>，最小到±5x10<sup>-324</sup>。以“0”开始且包含小数点的数字被解释为小数浮点数。
+浮点值为带小数部分的数。也可以用科学计数法来表示。这就是说，大写或小写“e”用来表示 10 的次方。Jscript用数值表示的八字节 IEEE754 浮点标准。这意味着数字最大可以到±1.7976931348623157x10<sup>308</sup>，最小到±5x10<sup>-324</sup>。以“0”开始且包含小数点的数字被解释为小数浮点数。
 
 注意以“0x”或“00”开始并包含小数点的数将发生错误。以下是 Jscript 中数字的例子。
 
@@ -1013,17 +1012,17 @@ Jscript 还有一些留作将来使用的保留字。这些字不是现在的 Js
 
 ### 保留词
 
-|break |delete |function |return |typeof | 
-|--- |---|--- |--- |--- | 
-|case |do |if |switch |var | 
+|break |delete |function |return |typeof |
+|--- |---|--- |--- |--- |
+|case |do |if |switch |var |
 |catch |else |in |this |void |
 |continue |false |instanceof |throw |while |
-|debugger |finally |new |true |with | 
+|debugger |finally |new |true |with |
 |default |for |null |try | |
 
 ### 为将来保留的词
 
-|abstract |double |goto |native |static | 
+|abstract |double |goto |native |static |
 |--- |--- |--- |--- |--- |
 |boolean |enum |implements |package |super |
 |byte |export |import |private |synchronized |
