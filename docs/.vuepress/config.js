@@ -4,7 +4,12 @@ const head = require('./config/head')
 const {config} = require('vuepress-theme-hope')
 
 module.exports = config({
-  lang: 'zh-CN',
+  locales: {
+    '/': {
+      // 设置需要的语言
+      lang: 'zh-CN'
+    }
+  },
   title: 'Jelly\'s Wiki',
   description: '个人知识收集管理小站',
   base: '/wiki/',

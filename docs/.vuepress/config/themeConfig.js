@@ -33,6 +33,10 @@ module.exports = {
     timezone: 'Asia/Shanghai'
   },
   encrypt: {
-    '/person/': ['admin888', '451453325']
-  }
+    config: {
+      '/person/': ['admin888', '451453325']
+    }
+  },
+  search: true,
+  searchMaxSuggestions: 10
 }
