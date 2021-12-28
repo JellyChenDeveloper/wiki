@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ubuntu安装openvpn | Jelly&#39;s Wiki</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="/wiki/img/favicon.ico">
+    <link rel="manifest" href="/wiki/manifest.webmanifest" crossorigin="use-credentials">
+    <meta name="description" content="个人知识收集管理小站">
+    <meta property="og:url" content="/wiki/SoftSys/software/%E4%BB%A3%E7%90%86/install_openvpn.html">
+    <meta property="og:site_name" content="Jelly's Wiki">
+    <meta property="og:title" content="ubuntu安装openvpn">
+    <meta property="og:description" content="ubuntu安装openvpn 服务端配置 安装openvpn 配置easy-rsa easy_rsa目录复制到openvpn配置文件目录 编辑vars文件 变量添加到系统变量中 清理秘钥目录 生成秘钥 生成授权秘钥 生成服务器秘钥 生成秘钥交换的dh秘钥及ta.key 配置openvpn 将生成的秘钥复制到openvpn配置目录下 获取默认的conf文件 ">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="zh-CN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image:alt" content="Jelly's Wiki">
+    <meta property="article:author" content="JellyChen">
+    <meta name="keywords" content="个人知识收集管理小站">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <meta name="theme-color" content="#46bd87">
+    
+    <link rel="preload" href="/wiki/assets/css/0.styles.a6a9370e.css" as="style"><link rel="preload" href="/wiki/assets/js/app.73e926b4.js" as="script"><link rel="preload" href="/wiki/assets/js/vendors~layout-Layout.47e08f5b.js" as="script"><link rel="preload" href="/wiki/assets/js/vendors~layout-Blog~layout-Layout~layout-NotFound.2660d734.js" as="script"><link rel="preload" href="/wiki/assets/js/page-ubuntu安装openvpn.181c2f16.js" as="script"><link rel="preload" href="/wiki/assets/js/vendors~layout-Blog~layout-Layout~layout-NotFound~layout-Slide.a4121212.js" as="script"><link rel="prefetch" href="/wiki/assets/js/103.503081e6.js"><link rel="prefetch" href="/wiki/assets/js/104.58dfaf8c.js"><link rel="prefetch" href="/wiki/assets/js/105.0d415cc8.js"><link rel="prefetch" href="/wiki/assets/js/106.53859722.js"><link rel="prefetch" href="/wiki/assets/js/107.e8905e0f.js"><link rel="prefetch" href="/wiki/assets/js/108.d2f7be62.js"><link rel="prefetch" href="/wiki/assets/js/layout-Blog.4a5e5ba2.js"><link rel="prefetch" href="/wiki/assets/js/layout-Layout.60f5be12.js"><link rel="prefetch" href="/wiki/assets/js/layout-NotFound.72be334b.js"><link rel="prefetch" href="/wiki/assets/js/layout-Slide.e4d1cfbe.js"><link rel="prefetch" href="/wiki/assets/js/page-$GLOBALS.2d19e536.js"><link rel="prefetch" href="/wiki/assets/js/page-$_SERVER.44214a07.js"><link rel="prefetch" href="/wiki/assets/js/page--14c8fcb8.4589b4b0.js"><link rel="prefetch" href="/wiki/assets/js/page--287a48b6.631936e1.js"><link rel="prefetch" href="/wiki/assets/js/page-BeyondCompare.1eadbb13.js"><link rel="prefetch" href="/wiki/assets/js/page-Ditto.26bccdb4.js"><link rel="prefetch" href="/wiki/assets/js/page-ElasticSearch.59ffe302.js"><link rel="prefetch" href="/wiki/assets/js/page-Everything.95b279da.js"><link rel="prefetch" href="/wiki/assets/js/page-HTML.1c525858.js"><link rel="prefetch" href="/wiki/assets/js/page-Home.29234bd3.js"><link rel="prefetch" href="/wiki/assets/js/page-Homebrew.f31b5d8a.js"><link rel="prefetch" href="/wiki/assets/js/page-JavaScript.911eeb08.js"><link rel="prefetch" href="/wiki/assets/js/page-JetBrains激活.40ff0a1f.js"><link rel="prefetch" href="/wiki/assets/js/page-Jetbrains系列破解方法.abc03347.js"><link rel="prefetch" href="/wiki/assets/js/page-Jscript用户指南.b5e1a643.js"><link rel="prefetch" href="/wiki/assets/js/page-Linux.954da59e.js"><link rel="prefetch" href="/wiki/assets/js/page-Node.d7804f9c.js"><link rel="prefetch" href="/wiki/assets/js/page-PHP.7a5c1a86.js"><link rel="prefetch" href="/wiki/assets/js/page-PHP标记.ce0fe6f8.js"><link rel="prefetch" href="/wiki/assets/js/page-PM2.992bc6e5.js"><link rel="prefetch" href="/wiki/assets/js/page-Postman.4a9cf3d5.js"><link rel="prefetch" href="/wiki/assets/js/page-Rules.437e70a7.js"><link rel="prefetch" href="/wiki/assets/js/page-Supervisor.ba97889d.js"><link rel="prefetch" href="/wiki/assets/js/page-Tmux使用教程.6479c07c.js"><link rel="prefetch" href="/wiki/assets/js/page-Ubuntu1604由于已经达到MaxReports限制，没有写入apport报告.ad6337b2.js"><link rel="prefetch" href="/wiki/assets/js/page-Ubuntu下PHP环境搭建.48450d18.js"><link rel="prefetch" href="/wiki/assets/js/page-WinSCP.6bd4bd99.js"><link rel="prefetch" href="/wiki/assets/js/page-Window对象.08f21f19.js"><link rel="prefetch" href="/wiki/assets/js/page-ab性能测试工具.66ee685f.js"><link rel="prefetch" href="/wiki/assets/js/page-ansible.f950690c.js"><link rel="prefetch" href="/wiki/assets/js/page-apache.3ce9afc5.js"><link rel="prefetch" href="/wiki/assets/js/page-argparse.42f3e75c.js"><link rel="prefetch" href="/wiki/assets/js/page-canel.6c80df01.js"><link rel="prefetch" href="/wiki/assets/js/page-cat.5e4efd3c.js"><link rel="prefetch" href="/wiki/assets/js/page-chgrp.a5d0b348.js"><link rel="prefetch" href="/wiki/assets/js/page-closed.a8138df1.js"><link rel="prefetch" href="/wiki/assets/js/page-defaultStatus.1065b445.js"><link rel="prefetch" href="/wiki/assets/js/page-docker.a3863557.js"><link rel="prefetch" href="/wiki/assets/js/page-docsify.e12d85cb.js"><link rel="prefetch" href="/wiki/assets/js/page-du.76c2315f.js"><link rel="prefetch" href="/wiki/assets/js/page-flume.002f46d3.js"><link rel="prefetch" href="/wiki/assets/js/page-flume使用.5c9d317b.js"><link rel="prefetch" href="/wiki/assets/js/page-git.ad1205b2.js"><link rel="prefetch" href="/wiki/assets/js/page-halt.6cc38b1f.js"><link rel="prefetch" href="/wiki/assets/js/page-innerheight.36a85629.js"><link rel="prefetch" href="/wiki/assets/js/page-logstash.794b46aa.js"><link rel="prefetch" href="/wiki/assets/js/page-logstash使用.7d712839.js"><link rel="prefetch" href="/wiki/assets/js/page-ls.0119fa29.js"><link rel="prefetch" href="/wiki/assets/js/page-mac安装中文man文档.a27f26f6.js"><link rel="prefetch" href="/wiki/assets/js/page-mac设置终端使用代理.72c0053d.js"><link rel="prefetch" href="/wiki/assets/js/page-markdownlint-cli.242e16d0.js"><link rel="prefetch" href="/wiki/assets/js/page-markdownlint.da6f5122.js"><link rel="prefetch" href="/wiki/assets/js/page-microtime.10235361.js"><link rel="prefetch" href="/wiki/assets/js/page-mongo.609e67f0.js"><link rel="prefetch" href="/wiki/assets/js/page-mongodb使用.117bd68a.js"><link rel="prefetch" href="/wiki/assets/js/page-navicat.af47f483.js"><link rel="prefetch" href="/wiki/assets/js/page-nginx.c4a7d422.js"><link rel="prefetch" href="/wiki/assets/js/page-npm.653a6605.js"><link rel="prefetch" href="/wiki/assets/js/page-open.a7850a80.js"><link rel="prefetch" href="/wiki/assets/js/page-poweroff.e0d0f842.js"><link rel="prefetch" href="/wiki/assets/js/page-reboot.b87cbb32.js"><link rel="prefetch" href="/wiki/assets/js/page-rm.c5957bc9.js"><link rel="prefetch" href="/wiki/assets/js/page-shutdown.3a4976d0.js"><link rel="prefetch" href="/wiki/assets/js/page-tmux常用键位.1df2f53e.js"><link rel="prefetch" href="/wiki/assets/js/page-touch.bab8133c.js"><link rel="prefetch" href="/wiki/assets/js/page-type.30e7bef4.js"><link rel="prefetch" href="/wiki/assets/js/page-ubuntu18中hadoop环境搭建.fe25e6b0.js"><link rel="prefetch" href="/wiki/assets/js/page-ubuntu18安装canel.32c56654.js"><link rel="prefetch" href="/wiki/assets/js/page-ubuntu18安装flume.f465e528.js"><link rel="prefetch" href="/wiki/assets/js/page-ubuntu18安装mongodb.f33231d6.js"><link rel="prefetch" href="/wiki/assets/js/page-ubuntu安装logstash.1b7e614c.js"><link rel="prefetch" href="/wiki/assets/js/page-ubuntu安装shadowsocks.30146603.js"><link rel="prefetch" href="/wiki/assets/js/page-vim.81b15578.js"><link rel="prefetch" href="/wiki/assets/js/page-vim学习记录文档.908163b5.js"><link rel="prefetch" href="/wiki/assets/js/page-vim安装中文帮助手册.b70bb50c.js"><link rel="prefetch" href="/wiki/assets/js/page-win10系统怎么将按住shift右键powershell修改为cmd.ad3f6058.js"><link rel="prefetch" href="/wiki/assets/js/page-windows设置终端使用代理.a662aa71.js"><link rel="prefetch" href="/wiki/assets/js/page-xShell.d109aed7.js"><link rel="prefetch" href="/wiki/assets/js/page-不翻墙上github.36ae9843.js"><link rel="prefetch" href="/wiki/assets/js/page-从HTML中分离.5b2ff91d.js"><link rel="prefetch" href="/wiki/assets/js/page-修改centos源镜像.d24deb7b.js"><link rel="prefetch" href="/wiki/assets/js/page-安装zsh.d3a8b0b4.js"><link rel="prefetch" href="/wiki/assets/js/page-小技巧.d2f05052.js"><link rel="prefetch" href="/wiki/assets/js/page-搭建个人知识管理系统docsify.40560e4f.js"><link rel="prefetch" href="/wiki/assets/js/page-服务器部署v2ray.95eb85be.js"><link rel="prefetch" href="/wiki/assets/js/page-服务器配置记录.23362ec1.js"><link rel="prefetch" href="/wiki/assets/js/page-正则表达式.ac134c10.js"><link rel="prefetch" href="/wiki/assets/js/page-语法示例.28fa99f1.js"><link rel="prefetch" href="/wiki/assets/js/page-软件系统.50c5d5f2.js"><link rel="prefetch" href="/wiki/assets/js/vendors~flowchart.c61a279e.js"><link rel="prefetch" href="/wiki/assets/js/vendors~mermaid.f9a9e3ab.js"><link rel="prefetch" href="/wiki/assets/js/vendors~photo-swipe.c6ef6110.js"><link rel="prefetch" href="/wiki/assets/js/vendors~reveal.d8616b89.js">
+    <link rel="stylesheet" href="/wiki/assets/css/0.styles.a6a9370e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container has-navbar has-anchor"><header class="navbar"><!----> <div class="content__navbar-start"></div> <button title="Sidebar Button" class="sidebar-button"><span class="icon"></span></button> <a href="/wiki/" class="home-link router-link-active"><img src="/wiki/img/logo.png" alt="Jelly's Wiki" class="logo"> <!----> <span class="site-name can-hide">Jelly's Wiki</span></a> <!----> <div class="content__navbar-center"></div> <div class="links"><button tabindex="-1" aria-hidden="true" class="color-button"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" class="skin-icon"><path d="M224 800c0 9.6 3.2 44.8 6.4 54.4 6.4 48-48 76.8-48 76.8s80 41.6 147.2 0 134.4-134.4
+        38.4-195.2c-22.4-12.8-41.6-19.2-57.6-19.2C259.2 716.8 227.2 761.6 224 800zM560 675.2l-32
+        51.2c-51.2 51.2-83.2 32-83.2 32 25.6 67.2 0 112-12.8 128 25.6 6.4 51.2 9.6 80 9.6 54.4 0
+        102.4-9.6 150.4-32l0 0c3.2 0 3.2-3.2 3.2-3.2 22.4-16 12.8-35.2
+        6.4-44.8-9.6-12.8-12.8-25.6-12.8-41.6 0-54.4 60.8-99.2 137.6-99.2 6.4 0 12.8 0 22.4
+        0 12.8 0 38.4 9.6 48-25.6 0-3.2 0-3.2 3.2-6.4 0-3.2 3.2-6.4 3.2-6.4 6.4-16 6.4-16 6.4-19.2
+        9.6-35.2 16-73.6 16-115.2 0-105.6-41.6-198.4-108.8-268.8C704 396.8 560 675.2 560 675.2zM224
+        419.2c0-28.8 22.4-51.2 51.2-51.2 28.8 0 51.2 22.4 51.2 51.2 0 28.8-22.4 51.2-51.2 51.2C246.4
+        470.4 224 448 224 419.2zM320 284.8c0-22.4 19.2-41.6 41.6-41.6 22.4 0 41.6 19.2 41.6 41.6 0
+        22.4-19.2 41.6-41.6 41.6C339.2 326.4 320 307.2 320 284.8zM457.6 208c0-12.8 12.8-25.6 25.6-25.6
+        12.8 0 25.6 12.8 25.6 25.6 0 12.8-12.8 25.6-25.6 25.6C470.4 233.6 457.6 220.8 457.6 208zM128
+        505.6C128 592 153.6 672 201.6 736c28.8-60.8 112-60.8 124.8-60.8-16-51.2 16-99.2
+        16-99.2l316.8-422.4c-48-19.2-99.2-32-150.4-32C297.6 118.4 128 291.2 128 505.6zM764.8
+        86.4c-22.4 19.2-390.4 518.4-390.4 518.4-22.4 28.8-12.8 76.8 22.4 99.2l9.6 6.4c35.2 22.4
+        80 12.8 99.2-25.6 0 0 6.4-12.8 9.6-19.2 54.4-105.6 275.2-524.8 288-553.6
+        6.4-19.2-3.2-32-19.2-32C777.6 76.8 771.2 80 764.8 86.4z"></path></svg> <div class="color-picker-menu" style="display:none;"><div class="theme-options"><ul class="themecolor-select"><label for="themecolor-select">主题色:</label> <li><span class="default-theme"></span></li> </ul> <div class="darkmode-toggle"><label for="darkmode-toggle" class="desc">主题模式:</label> <div class="darkmode-switch"><div class="item day"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" class="icon light-icon"><path d="M512 256a42.667 42.667 0 0 0 42.667-42.667V128a42.667 42.667 0 0 0-85.334 0v85.333A42.667 42.667 0 0 0 512 256zm384 213.333h-85.333a42.667 42.667 0 0 0 0 85.334H896a42.667 42.667 0 0 0 0-85.334zM256 512a42.667 42.667 0 0 0-42.667-42.667H128a42.667 42.667 0 0 0 0 85.334h85.333A42.667 42.667 0 0 0 256 512zm9.387-298.667a42.667 42.667 0 0 0-59.307 62.72l61.44 59.307a42.667 42.667 0 0 0 31.147 11.947 42.667 42.667 0 0 0 30.72-13.227 42.667 42.667 0 0 0 0-60.16zm459.946 133.974a42.667 42.667 0 0 0 29.44-11.947l61.44-59.307a42.667 42.667 0 0 0-57.6-62.72l-61.44 60.587a42.667 42.667 0 0 0 0 60.16 42.667 42.667 0 0 0 28.16 13.227zM512 768a42.667 42.667 0 0 0-42.667 42.667V896a42.667 42.667 0 0 0 85.334 0v-85.333A42.667 42.667 0 0 0 512 768zm244.48-79.36a42.667 42.667 0 0 0-59.307 61.44l61.44 60.587a42.667 42.667 0 0 0 29.44 11.946 42.667 42.667 0 0 0 30.72-12.8 42.667 42.667 0 0 0 0-60.586zm-488.96 0-61.44 59.307a42.667 42.667 0 0 0 0 60.586 42.667 42.667 0 0 0 30.72 12.8 42.667 42.667 0 0 0 28.587-10.666l61.44-59.307a42.667 42.667 0 0 0-59.307-61.44zM512 341.333A170.667 170.667 0 1 0 682.667 512 170.667 170.667 0 0 0 512 341.333z" fill="currentColor"></path></svg></div> <div class="item auto active"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" class="icon auto-icon"><path d="M460.864 539.072H564.8L510.592 376l-49.728 163.072zM872 362.368V149.504H659.648L510.528 0l-149.12 149.504H149.12v212.928L0 511.872l149.12 149.504v212.928h212.352l149.12 149.504 149.12-149.504h212.352V661.376l149.12-149.504L872 362.368zM614.464 693.12l-31.616-90.624H438.272l-31.616 90.624h-85.888l144.576-407.68h90.368l144.576 407.68h-85.824zm0 0" fill="currentColor"></path></svg></div> <div class="item night"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" class="icon dark-icon"><path d="M935.539 630.402c-11.43-11.432-28.674-14.739-43.531-8.354-46.734 20.103-96.363 30.297-147.508 30.297-99.59 0-193.221-38.784-263.64-109.203-108.637-108.637-139.61-270.022-78.908-411.148a39.497 39.497 0 0 0-51.886-51.887c-52.637 22.64-100.017 54.81-140.826 95.616-85.346 85.346-132.346 198.821-132.346 319.52 0 120.7 47.001 234.172 132.347 319.519S408.063 947.11 528.76 947.11c120.7 0 234.172-47.003 319.52-132.351 40.809-40.81 72.978-88.19 95.616-140.826a39.497 39.497 0 0 0-8.356-43.532z" fill="currentColor"></path></svg></div></div> <!----></div></div></div></button> <div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/wiki/" class="nav-link router-link-active"><!---->
+  首页
+</a></div><div class="nav-item"><a href="/wiki/article/" class="nav-link"><!---->
+  所有文章
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="开发语言" class="dropdown-title"><span class="title"><!---->
+        开发语言
+      </span> <span class="arrow"></span></button> <ul class="nav-dropdown"><li class="dropdown-item"><a href="/wiki/JavaScript/" class="nav-link"><!---->
+  JavaScript
+</a></li><li class="dropdown-item"><a href="/wiki/html/" class="nav-link"><!---->
+  HTML
+</a></li><li class="dropdown-item"><a href="/wiki/PHP/" class="nav-link"><!---->
+  PHP
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="开发环境" class="dropdown-title"><span class="title"><!---->
+        开发环境
+      </span> <span class="arrow"></span></button> <ul class="nav-dropdown"><li class="dropdown-item"><a href="/wiki/Linux/" class="nav-link"><!---->
+  Linux
+</a></li><li class="dropdown-item"><a href="/wiki/Node/" class="nav-link"><!---->
+  Node
+</a></li><li class="dropdown-item"><a href="/wiki/ElasticSearch/" class="nav-link"><!---->
+  ElasticSearch
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="软件系统" class="dropdown-title"><span class="title"><!---->
+        软件系统
+      </span> <span class="arrow"></span></button> <ul class="nav-dropdown"><li class="dropdown-item"><a href="/wiki/SoftSys/" class="nav-link router-link-active active"><!---->
+  软件系统
+</a></li><li class="dropdown-item"><a href="/wiki/Server/" class="nav-link"><!---->
+  服务器配置记录
+</a></li></ul></div></div><div class="nav-item"><a href="/wiki/vim/" class="nav-link"><!---->
+  vim
+</a></div></nav> <!----> <!----> <!----> <div class="content__navbar-end"></div></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!----> <!----> <div class="content__sidebar-top"></div> <nav class="sidebar-nav-links"><div class="nav-item"><a href="/wiki/" class="nav-link router-link-active"><!---->
+  首页
+</a></div><div class="nav-item"><a href="/wiki/article/" class="nav-link"><!---->
+  所有文章
+</a></div><div class="nav-item"><div class="mobile-dropdown-wrapper"><button type="button" aria-label="开发语言" class="dropdown-title"><span class="title"><!---->
+      开发语言
+    </span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/wiki/JavaScript/" class="nav-link"><!---->
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/wiki/html/" class="nav-link"><!---->
+  HTML
+</a></li><li class="dropdown-item"><!----> <a href="/wiki/PHP/" class="nav-link"><!---->
+  PHP
+</a></li></ul></div></div><div class="nav-item"><div class="mobile-dropdown-wrapper"><button type="button" aria-label="开发环境" class="dropdown-title"><span class="title"><!---->
+      开发环境
+    </span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/wiki/Linux/" class="nav-link"><!---->
+  Linux
+</a></li><li class="dropdown-item"><!----> <a href="/wiki/Node/" class="nav-link"><!---->
+  Node
+</a></li><li class="dropdown-item"><!----> <a href="/wiki/ElasticSearch/" class="nav-link"><!---->
+  ElasticSearch
+</a></li></ul></div></div><div class="nav-item"><div class="mobile-dropdown-wrapper"><button type="button" aria-label="软件系统" class="dropdown-title"><span class="title"><!---->
+      软件系统
+    </span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/wiki/SoftSys/" class="nav-link router-link-active active"><!---->
+  软件系统
+</a></li><li class="dropdown-item"><!----> <a href="/wiki/Server/" class="nav-link"><!---->
+  服务器配置记录
+</a></li></ul></div></div><div class="nav-item"><a href="/wiki/vim/" class="nav-link"><!---->
+  vim
+</a></div> <!----></nav> <!----> <div class="content__sidebar-center"></div> <!----> <!----> <div class="content__sidebar-bottom"></div> <!----></aside> <main class="page"><nav class="breadcrumb"><ol vocab="https://schema.org/" typeof="BreadcrumbList"><li property="itemListElement" typeof="ListItem"><a href="/wiki/SoftSys/" property="item" typeof="WebPage" class="router-link-active"><!----> <span property="name">软件系统</span></a> <meta property="position" content="1"></li><li property="itemListElement" typeof="ListItem" class="is-active"><a href="/wiki/SoftSys/software/%E4%BB%A3%E7%90%86/install_openvpn/" aria-current="page" property="item" typeof="WebPage" class="router-link-exact-active router-link-active"><!----> <span property="name">ubuntu安装openvpn</span></a> <meta property="position" content="2"></li></ol></nav> <!----> <div class="content__page-top"></div> <div vocab="https://schema.org/" typeof="Article" class="page-title"><h1><!----> <span property="headline">ubuntu安装openvpn</span></h1> <div class="page-info"><!----> <!----><!----><span aria-label="写作日期📅" data-balloon-pos="down" class="time-info"><svg viewBox="0 0 1030 1024" xmlns="http://www.w3.org/2000/svg" class="icon calendar-icon"><path d="M716.4 110.137c0-18.753-14.72-33.473-33.472-33.473-18.753 0-33.473 14.72-33.473 33.473v33.473h66.993v-33.473zm-334.87 0c0-18.753-14.72-33.473-33.473-33.473s-33.52 14.72-33.52 33.473v33.473h66.993v-33.473zm468.81 33.52H716.4v100.465c0 18.753-14.72 33.473-33.472 33.473a33.145 33.145 0 0 1-33.473-33.473V143.657H381.53v100.465c0 18.753-14.72 33.473-33.473 33.473a33.145 33.145 0 0 1-33.473-33.473V143.657H180.6A134.314 134.314 0 0 0 46.66 277.595v535.756A134.314 134.314 0 0 0 180.6 947.289h669.74a134.36 134.36 0 0 0 133.94-133.938V277.595a134.314 134.314 0 0 0-133.94-133.938zm33.473 267.877H147.126a33.145 33.145 0 0 1-33.473-33.473c0-18.752 14.72-33.473 33.473-33.473h736.687c18.752 0 33.472 14.72 33.472 33.473a33.145 33.145 0 0 1-33.472 33.473z" fill="currentColor"></path></svg> <span property="datePublished">2021-9-16</span></span><!----><!----><span aria-label="阅读时间⌛" data-balloon-pos="down" class="reading-time-info"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" class="icon timer-icon"><path d="M799.387 122.15c4.402-2.978 7.38-7.897 7.38-13.463v-1.165c0-8.933-7.38-16.312-16.312-16.312H256.33c-8.933 0-16.311 7.38-16.311 16.312v1.165c0 5.825 2.977 10.874 7.637 13.592 4.143 194.44 97.22 354.963 220.201 392.763-122.204 37.542-214.893 196.511-220.2 389.397-4.661 5.049-7.638 11.651-7.638 19.03v5.825h566.49v-5.825c0-7.379-2.849-13.981-7.509-18.9-5.049-193.016-97.867-351.985-220.2-389.527 123.24-37.67 216.446-198.453 220.588-392.892zM531.16 450.445v352.632c117.674 1.553 211.787 40.778 211.787 88.676H304.097c0-48.286 95.149-87.382 213.728-88.676V450.445c-93.077-3.107-167.901-81.297-167.901-177.093 0-8.803 6.99-15.793 15.793-15.793 8.803 0 15.794 6.99 15.794 15.793 0 80.261 63.69 145.635 142.01 145.635s142.011-65.374 142.011-145.635c0-8.803 6.99-15.793 15.794-15.793s15.793 6.99 15.793 15.793c0 95.019-73.789 172.82-165.96 177.093z" fill="currentColor"></path></svg> <span>大约 5 分钟</span> <meta property="timeRequired" content="PT5M"></span></div> <!----> <hr></div> <div class="anchor-place-holder"><aside id="anchor"><div class="anchor-wrapper"><ul class="anchor-list"><li class="anchor"><a href="/wiki/SoftSys/software/%E4%BB%A3%E7%90%86/install_openvpn/#服务端配置" class="anchor-link heading2"><div>服务端配置</div></a></li><li class="anchor"><a href="/wiki/SoftSys/software/%E4%BB%A3%E7%90%86/install_openvpn/#安装openvpn" class="anchor-link heading3"><div>安装openvpn</div></a></li><li class="anchor"><a href="/wiki/SoftSys/software/%E4%BB%A3%E7%90%86/install_openvpn/#配置easy-rsa" class="anchor-link heading3"><div>配置easy-rsa</div></a></li><li class="anchor"><a href="/wiki/SoftSys/software/%E4%BB%A3%E7%90%86/install_openvpn/#生成秘钥" class="anchor-link heading3"><div>生成秘钥</div></a></li><li class="anchor"><a href="/wiki/SoftSys/software/%E4%BB%A3%E7%90%86/install_openvpn/#配置openvpn" class="anchor-link heading3"><div>配置openvpn</div></a></li><li class="anchor"><a href="/wiki/SoftSys/software/%E4%BB%A3%E7%90%86/install_openvpn/#配置服务端ip转发" class="anchor-link heading3"><div>配置服务端ip转发</div></a></li><li class="anchor"><a href="/wiki/SoftSys/software/%E4%BB%A3%E7%90%86/install_openvpn/#服务端启动openvpn" class="anchor-link heading3"><div>服务端启动openvpn</div></a></li><li class="anchor"><a href="/wiki/SoftSys/software/%E4%BB%A3%E7%90%86/install_openvpn/#客户端" class="anchor-link heading2"><div>客户端</div></a></li><li class="anchor"><a href="/wiki/SoftSys/software/%E4%BB%A3%E7%90%86/install_openvpn/#在服务端生成客户端的配置文件" class="anchor-link heading3"><div>在服务端生成客户端的配置文件</div></a></li><li class="anchor"><a href="/wiki/SoftSys/software/%E4%BB%A3%E7%90%86/install_openvpn/#客户端安装" class="anchor-link heading3"><div>客户端安装</div></a></li><li class="anchor"><a href="/wiki/SoftSys/software/%E4%BB%A3%E7%90%86/install_openvpn/#客户端获取配置文件" class="anchor-link heading3"><div>客户端获取配置文件</div></a></li><li class="anchor"><a href="/wiki/SoftSys/software/%E4%BB%A3%E7%90%86/install_openvpn/#客户端启动" class="anchor-link heading3"><div>客户端启动</div></a></li><li class="anchor"><a href="/wiki/SoftSys/software/%E4%BB%A3%E7%90%86/install_openvpn/#自动生成客户端配置脚本" class="anchor-link heading2"><div>自动生成客户端配置脚本</div></a></li><li class="anchor"><a href="/wiki/SoftSys/software/%E4%BB%A3%E7%90%86/install_openvpn/#创建脚本" class="anchor-link heading3"><div>创建脚本</div></a></li><li class="anchor"><a href="/wiki/SoftSys/software/%E4%BB%A3%E7%90%86/install_openvpn/#使用脚本" class="anchor-link heading3"><div>使用脚本</div></a></li></ul></div></aside></div> <!----> <div class="content__content-top"></div> <div class="theme-default-content content__default"><h1 id="ubuntu安装openvpn"><a href="#ubuntu安装openvpn" class="header-anchor">#</a> ubuntu安装openvpn</h1> <h2 id="服务端配置"><a href="#服务端配置" class="header-anchor">#</a> 服务端配置</h2> <h3 id="安装openvpn"><a href="#安装openvpn" class="header-anchor">#</a> 安装openvpn</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># 安装openvpn和easy_rsa</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> openvpn easy-rsa
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h3 id="配置easy-rsa"><a href="#配置easy-rsa" class="header-anchor">#</a> 配置easy-rsa</h3> <p>easy_rsa目录复制到openvpn配置文件目录</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">sudo</span> <span class="token function">cp</span> -r /usr/share/easy-rsa /etc/openvpn
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>编辑vars文件</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token builtin class-name">cd</span> /etc/openvpn/easy-rsa
+<span class="token function">vim</span> vars
+<span class="token comment"># &gt;&gt;&gt;</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">KEY_COUNTRY</span><span class="token operator">=</span><span class="token string">&quot;CN&quot;</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">KEY_PROVINCE</span><span class="token operator">=</span><span class="token string">&quot;XJ&quot;</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">KEY_CITY</span><span class="token operator">=</span><span class="token string">&quot;Urumchi&quot;</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">KEY_ORG</span><span class="token operator">=</span><span class="token string">&quot;JellyOrg&quot;</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">KEY_EMAIL</span><span class="token operator">=</span><span class="token string">&quot;1@1.com&quot;</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">KEY_OU</span><span class="token operator">=</span><span class="token string">&quot;Community&quot;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>变量添加到系统变量中</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token builtin class-name">source</span> ./vars
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>清理秘钥目录</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>./clean-all
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h3 id="生成秘钥"><a href="#生成秘钥" class="header-anchor">#</a> 生成秘钥</h3> <p>生成授权秘钥</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>./build-ca
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>生成服务器秘钥</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>./build-key-server server
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>生成秘钥交换的dh秘钥及ta.key</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>./build-dh
+openvpn –genkey –secret keys/ta.key
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h3 id="配置openvpn"><a href="#配置openvpn" class="header-anchor">#</a> 配置openvpn</h3> <p>将生成的秘钥复制到openvpn配置目录下</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token builtin class-name">cd</span> /etc/openvpn/easy-rsa/keys
+<span class="token function">sudo</span> <span class="token function">cp</span> ca.crt ca.key server.crt server.key ta.key dh2048.pem /etc/openvpn
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>获取默认的conf文件</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>gunzip -c /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">tee</span> /etc/openvpn/server.conf
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>编辑服务端配置文件</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token builtin class-name">cd</span> /etc/openvpn
+<span class="token comment"># 查看配置文件信息</span>
+<span class="token function">grep</span> -vE <span class="token string">&quot;^#|^$|^;&quot;</span> server.conf
+<span class="token comment"># 编辑配置文件</span>
+<span class="token function">vim</span> server.conf
+<span class="token comment"># &gt;&gt;&gt;</span>
+port <span class="token number">1194</span>
+proto tcp
+dev tap
+ca ca.crt
+cert server.crt
+key server.key  <span class="token comment"># This file should be kept secret</span>
+dh dh2048.pem
+server <span class="token number">100.100</span>.0.0 <span class="token number">255.255</span>.255.0 <span class="token comment"># 配置openvpn的ip段</span>
+ifconfig-pool-persist ipp.txt
+push <span class="token string">&quot;route 100.100.0.0 255.255.0.0&quot;</span> <span class="token comment"># 配置该ip段走vpn流量</span>
+client-config-dir ccd   <span class="token comment"># 开启客户端自定义配置</span>
+client-to-client    <span class="token comment"># 开启客户端互相访问</span>
+keepalive <span class="token number">10</span> <span class="token number">120</span>
+tls-auth ta.key <span class="token number">0</span> <span class="token comment"># This file is secret</span>
+key-direction <span class="token number">0</span>
+cipher AES-128-CBC   <span class="token comment"># AES</span>
+auth SHA256
+comp-lzo
+persist-key
+persist-tun
+status openvpn-status.log
+log         openvpn.log
+log-append  openvpn.log
+verb <span class="token number">3</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br></div></div><h3 id="配置服务端ip转发"><a href="#配置服务端ip转发" class="header-anchor">#</a> 配置服务端ip转发</h3> <p>编辑/etc/sysctl.conf</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">sudo</span> <span class="token function">vim</span> /etc/sysctl.conf
+<span class="token comment"># &gt;&gt;&gt;</span>
+<span class="token comment"># 找到net.ipv4.ip_forward，将前面的#去掉，也是取消注释的意思。</span>
+net.ipv4.ip_forward<span class="token operator">=</span><span class="token number">1</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>保存关闭，并且重新让系统读取一遍这个文件</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">sudo</span> sysctl -p
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h3 id="服务端启动openvpn"><a href="#服务端启动openvpn" class="header-anchor">#</a> 服务端启动openvpn</h3> <p>开启OpenVPN服务，并设置开机自动启动。</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">sudo</span> systemctl start openvpn@server
+<span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> openvpn@server
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>验证</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># 查看进程是否启动</span>
+<span class="token function">ps</span> -ef<span class="token operator">|</span> <span class="token function">grep</span> openvpn
+<span class="token comment"># 查看1194端口是否开放</span>
+<span class="token function">netstat</span> -npl
+<span class="token comment"># 查看openvpn是否添加网卡</span>
+<span class="token function">ifconfig</span>
+<span class="token comment"># 如果成功添加网卡，可在输出中看到tap0或tun0的网卡</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>如果启动失败，可查看程序状态查看是否有问题</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">sudo</span> systemctl status openvpn@server
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>也可以前台启动进程查看是否有问题：</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token builtin class-name">cd</span> /etc/openvpn
+openvpn --config server.conf
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h2 id="客户端"><a href="#客户端" class="header-anchor">#</a> 客户端</h2> <h3 id="在服务端生成客户端的配置文件"><a href="#在服务端生成客户端的配置文件" class="header-anchor">#</a> 在服务端生成客户端的配置文件</h3> <h4 id="生成客户端证书"><a href="#生成客户端证书" class="header-anchor">#</a> 生成客户端证书</h4> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token builtin class-name">cd</span> /etc/openvpn/easy-rsa
+<span class="token comment"># 添加变量</span>
+<span class="token builtin class-name">source</span> ./vars
+<span class="token comment"># 生成证书</span>
+./build-key client
+<span class="token comment"># 配置固定ip</span>
+<span class="token function">vim</span> /etc/openvpn/ccd/client
+<span class="token comment"># &gt;&gt;&gt;</span>
+ifconfig-push <span class="token number">100.100</span>.0.9 <span class="token number">255.255</span>.255.0 <span class="token comment"># 配置固定ip</span>
+<span class="token comment"># 创建客户端配置文件目录</span>
+<span class="token function">mkdir</span> ~/client
+<span class="token comment"># 复制秘钥</span>
+<span class="token builtin class-name">cd</span> /etc/openvpn/easy-rsa/keys
+<span class="token function">cp</span> ca.crt ta.key client.crt client.key <span class="token builtin class-name">.</span>
+<span class="token comment"># 复制配置文件</span>
+<span class="token builtin class-name">cd</span> ~/client
+<span class="token function">cp</span> /usr/share/doc/openvpn/examples/sample-config-files/client.conf <span class="token builtin class-name">.</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><h4 id="编辑配置文件"><a href="#编辑配置文件" class="header-anchor">#</a> 编辑配置文件</h4> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">vim</span> client.conf
+<span class="token comment"># &gt;&gt;&gt;</span>
+client
+dev tap
+proto tcp
+remote <span class="token number">47.52</span>.94.36 <span class="token number">1194</span>
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+ca ca.crt
+cert client.crt
+key client.key
+remote-cert-tls server
+tls-auth ta.key <span class="token number">1</span>
+cipher AES-128-CBC
+auth SHA256
+comp-lzo
+verb <span class="token number">3</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><h3 id="客户端安装"><a href="#客户端安装" class="header-anchor">#</a> 客户端安装</h3> <p>假如客户端是ubuntu：
+安装openvpn</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">apt</span> <span class="token function">install</span> openvpn
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h3 id="客户端获取配置文件"><a href="#客户端获取配置文件" class="header-anchor">#</a> 客户端获取配置文件</h3> <p>下载~/client内所有文件</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token builtin class-name">cd</span> /etc/openvpn
+<span class="token function">sudo</span> <span class="token function">scp</span> -r root@47.52.94.36:~/client/ <span class="token builtin class-name">.</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h3 id="客户端启动"><a href="#客户端启动" class="header-anchor">#</a> 客户端启动</h3> <p>开启OpenVPN服务，并设置开机自动启动。</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">sudo</span> systemctl start openvpn@home_ubuntu
+<span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> openvpn@home_ubuntu
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>验证</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># 查看进程是否启动</span>
+<span class="token function">ps</span> -ef<span class="token operator">|</span> <span class="token function">grep</span> openvpn
+<span class="token comment"># 查看openvpn是否添加网卡</span>
+<span class="token function">ifconfig</span>
+<span class="token comment"># 如果成功添加网卡，可在输出中看到tap0或tun0的网卡</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>如果启动失败，可查看程序状态查看是否有问题</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">sudo</span> systemctl status openvpn@client
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>也可以前台启动进程查看是否有问题：</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token builtin class-name">cd</span> /etc/openvpn
+openvpn --config client.conf
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h2 id="自动生成客户端配置脚本"><a href="#自动生成客户端配置脚本" class="header-anchor">#</a> 自动生成客户端配置脚本</h2> <h3 id="创建脚本"><a href="#创建脚本" class="header-anchor">#</a> 创建脚本</h3> <p>在用户目录下创建openvpn_client文件夹</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">mkdir</span> ~/openvpn_client
+<span class="token builtin class-name">cd</span> openvpn_client/
+<span class="token function">vim</span> generate_openvpn_client.sh
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>进入vim后执行</p> <div class="language-vim line-numbers-mode"><pre class="language-vim"><code><span class="token punctuation">:</span><span class="token keyword">set</span> <span class="token builtin">paste</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>复制以下脚本内容：</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token shebang important">#!/bin/bash</span>
+<span class="token comment"># ScriptName: generate_openvpn_client</span>
+<span class="token comment"># Auth: JellyChen</span>
+<span class="token comment">#</span>
+<span class="token comment"># OpenVpn automated generate client config file, only test on ubuntu, other OS please modify yourself.</span>
+
+<span class="token assign-left variable">client_user</span><span class="token operator">=</span><span class="token string">''</span>
+<span class="token builtin class-name">read</span> -p <span class="token string">&quot;please input client user name: &quot;</span> client_user
+
+<span class="token assign-left variable">server_ip</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">curl</span> -s4 canhazip.com<span class="token variable">)</span></span>
+<span class="token assign-left variable">server_port</span><span class="token operator">=</span><span class="token number">1194</span>
+<span class="token assign-left variable">client_conf_file</span><span class="token operator">=</span>/tmp/<span class="token variable">${client_user}</span>.ovpn
+<span class="token assign-left variable">client_ip</span><span class="token operator">=</span><span class="token string">''</span>
+<span class="token assign-left variable">base_dir</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">pwd</span><span class="token variable">)</span></span>
+<span class="token assign-left variable">file_dir</span><span class="token operator">=</span><span class="token variable">${base_dir}</span>/<span class="token variable">${client_user}</span>
+<span class="token assign-left variable">go_on</span><span class="token operator">=</span><span class="token string">'y'</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> -d <span class="token string">&quot;<span class="token variable">$file_dir</span>&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token keyword">then</span>
+    <span class="token builtin class-name">echo</span> -ne <span class="token string">&quot;<span class="token entity" title="\033">\033</span>[1;33m This directory <span class="token variable">$file_dir</span> has existed. <span class="token entity" title="\033">\033</span>[0m  continue? (y/n):&quot;</span>
+    <span class="token builtin class-name">read</span> go_on
+    <span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token variable">${go_on}</span> -ne <span class="token string">&quot;y&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+        <span class="token builtin class-name">exit</span> <span class="token number">1</span>
+    <span class="token keyword">fi</span>
+<span class="token keyword">fi</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> -f <span class="token string">&quot;<span class="token variable">$file_dir</span>/<span class="token variable">$client_user</span>.crt&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token keyword">then</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token entity" title="\033">\033</span>[1;33m Configure file <span class="token variable">$file_dir</span>/<span class="token variable">$client_user</span>.crt has existed, break.<span class="token entity" title="\n">\n</span> <span class="token entity" title="\033">\033</span>[0m&quot;</span>
+    <span class="token builtin class-name">exit</span> <span class="token number">2</span>
+<span class="token keyword">fi</span>
+
+<span class="token builtin class-name">set</span> -x
+
+<span class="token builtin class-name">cd</span> /etc/openvpn/easy-rsa
+<span class="token builtin class-name">source</span> ./vars <span class="token operator">&gt;</span>/dev/null <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span>
+./pkitool <span class="token variable">${client_user}</span> <span class="token operator">&gt;</span>/dev/null <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span>
+<span class="token builtin class-name">cd</span> /etc/openvpn/easy-rsa/keys
+<span class="token function">mkdir</span> <span class="token variable">${file_dir}</span>
+<span class="token function">cp</span> ta.key ca.crt <span class="token variable">${file_dir}</span>
+<span class="token function">mv</span> <span class="token variable">${client_user}</span>.crt <span class="token variable">${client_user}</span>.key <span class="token variable">${file_dir}</span>
+<span class="token function">rm</span> <span class="token variable">${client_user}</span>.csr *.pem *.old index.txt.attr
+
+<span class="token builtin class-name">set</span> +x
+
+<span class="token builtin class-name">read</span> -p <span class="token string">&quot;Input the ip you hope to use (in 100.100.0.0) : &quot;</span> client_ip
+<span class="token builtin class-name">echo</span> -ne <span class="token string">&quot;The ip you want to config is <span class="token entity" title="\033">\033</span>[1;32m<span class="token variable">$client_ip</span><span class="token entity" title="\033">\033</span>[0m, are you sure?(y/n). &quot;</span>
+<span class="token builtin class-name">read</span> go_on
+<span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token variable">${go_on}</span> -ne <span class="token string">'y'</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+    <span class="token builtin class-name">exit</span> <span class="token number">3</span>
+<span class="token keyword">fi</span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;ifconfig-push <span class="token variable">$client_ip</span> 255.255.255.0&quot;</span> <span class="token operator">&gt;</span> /etc/openvpn/ccd/<span class="token variable">${client_user}</span>
+
+
+<span class="token builtin class-name">echo</span> -ne <span class="token string">&quot;The server ip is <span class="token entity" title="\033">\033</span>[1;32m <span class="token variable">$server_ip</span> <span class="token entity" title="\033">\033</span>[0m, press return to continue, or input new server ip: &quot;</span>
+<span class="token builtin class-name">read</span> new_server_ip
+<span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token variable">$new_server_ip</span> -ne <span class="token string">''</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+    <span class="token assign-left variable">server_ip</span><span class="token operator">=</span>new_server_ip
+<span class="token keyword">fi</span>
+
+cat<span class="token operator">&gt;</span><span class="token variable">${file_dir}</span>/<span class="token variable">${client_user}</span>.conf<span class="token operator">&lt;&lt;</span><span class="token string">EOF
+client
+dev tap
+proto tcp
+remote <span class="token variable">${server_ip}</span> <span class="token variable">${server_port}</span>
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+ca ca.crt
+cert <span class="token variable">${client_user}</span>.crt
+key <span class="token variable">${client_user}</span>.key
+remote-cert-tls server
+tls-auth ta.key 1
+cipher AES-128-CBC
+auth SHA256
+comp-lzo
+verb 3
+EOF</span>
+
+<span class="token builtin class-name">echo</span> -e <span class="token string">&quot;The process is finished, the config files is in <span class="token variable">$file_dir</span>.&quot;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br></div></div><p>保存并赋予可执行权限：</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">chmod</span> +x generate_openvpn_client.sh
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h3 id="使用脚本"><a href="#使用脚本" class="header-anchor">#</a> 使用脚本</h3> <p>进入~/openvpn_client</p> <p>执行该脚本：</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token builtin class-name">cd</span> ~/openvpn_client
+./generate_openvpn_client.sh
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>客户端获取配置文件</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">sudo</span> <span class="token function">scp</span> -r root@47.52.94.36:/root/openvpn_client/home_ubuntu/* <span class="token builtin class-name">.</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div></div> <!----> <div class="content__content-bottom"></div> <footer class="page-meta"><div class="edit-link"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" class="icon edit-icon"><path d="M117.953 696.992 64.306 959.696l265.931-49.336 450.204-452.505-212.284-213.376-450.204 452.513zm496.384-296.326L219.039 797.993l-46.108-46.34L568.233 354.33l46.104 46.335zm345.357-122.99-114.45 115.04-212.288-213.377 114.45-115.035 212.288 213.371zm0 0" fill="currentColor"></path></svg> <a href="https://github.com/JellyChenDeveloper/wiki/edit/main/docs/SoftSys/software/代理/install_openvpn.md" target="_blank" rel="noopener noreferrer">编辑此页</a></div> <div class="meta-item update-time"><span class="label">上次编辑于:</span> <span class="info">2021年9月16日 15:19</span></div> <!----></footer> <!----> <!----> <!----> <div class="content__page-bottom"></div></main> <footer class="footer-wrapper"><!----> <div class="footer"><a href="/" target="_self">Jelly WIKI</a> | <a href="http://jellychen.cn" target="_blank">jellychen.cn</a></div> <div class="copyright">Copyright © 2015-present | <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备18020599号-1</a></div></footer></div><div class="global-ui"><!----><!----><div id="pwa-install"><!----> <div id="install-modal-wrapper" style="display:none;"><div class="background"></div> <div class="install-modal"><div class="header"><button aria-label="关闭" class="close-button"><svg width="23" height="22" xmlns="http://www.w3.org/2000/svg" class="icon close-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M1.12.358a1.224 1.224 0 011.729 0l8.92 8.914L20.686.358a1.224 1.224 0 011.73 1.728L13.497 11l8.92 8.913a1.222 1.222 0 11-1.73 1.729l-8.919-8.913-8.92 8.913a1.224 1.224 0 01-1.729-1.729L10.04 11l-8.92-8.914a1.222 1.222 0 010-1.728z" fill="currentColor"></path></svg></button> <div class="logo"><!----> <div class="title"><h1></h1> <p class="desc">该应用可以安装在您的 PC 或移动设备上。这将使该 Web 应用程序外观和行为与其他应用程序相同。它将在出现在应用程序列表中，并可以固定到主屏幕，开始菜单或任务栏。此 Web 应用程序还将能够与其他应用程序和您的操作系统安全地进行交互。</p></div></div></div> <div class="content"><div class="highlight"><!----> <!----></div> <div class="description"><h3>详情</h3> <p></p></div></div> <div class="button-wrapper"><button class="install-button">
+        安装 <span></span></button> <button class="cancel-button">
+        取消
+      </button></div></div></div></div><div tabindex="-1" role="dialog" aria-hidden="true" class="pswp"><div class="pswp__bg"></div> <div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div> <div class="pswp__item"></div> <div class="pswp__item"></div></div> <div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div> <button class="pswp__button pswp__button--close"></button> <button class="pswp__button pswp__button--share"></button> <button class="pswp__button pswp__button--fs"></button> <button class="pswp__button pswp__button--zoom"></button> <div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div> <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div> <button class="pswp__button pswp__button--arrow--left"></button> <button class="pswp__button pswp__button--arrow--right"></button> <div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div></div></div></div>
+    <script src="/wiki/assets/js/app.73e926b4.js" defer></script><script src="/wiki/assets/js/vendors~layout-Layout.47e08f5b.js" defer></script><script src="/wiki/assets/js/vendors~layout-Blog~layout-Layout~layout-NotFound.2660d734.js" defer></script><script src="/wiki/assets/js/page-ubuntu安装openvpn.181c2f16.js" defer></script><script src="/wiki/assets/js/vendors~layout-Blog~layout-Layout~layout-NotFound~layout-Slide.a4121212.js" defer></script>
+  </body>
+</html>
